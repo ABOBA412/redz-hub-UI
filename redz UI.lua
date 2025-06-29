@@ -8,7 +8,7 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
-local Xlibrary = {
+local redzlib = {
 	Themes = {
 		Darker = {
 			["Color Hub 1"] = ColorSequence.new({
@@ -890,8 +890,8 @@ local Xlibrary = {
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
 
-local Settings = Xlibrary.Settings
-local Flags = Xlibrary.Flags
+local Settings = redzlib.Settings
+local Flags = redzlib.Flags
 
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
@@ -951,7 +951,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "X library.json")
+	pcall(Save, "redz library V5.json")
 end
 
 local Funcs = {} do
@@ -1011,7 +1011,7 @@ local Funcs = {} do
 	end
 end
 
-local Connections, Connection = {}, Xlibrary.Connection do
+local Connections, Connection = {}, redzlib.Connection do
 	local function NewConnectionList(List)
 		if type(List) ~= "table" then return end
 		
@@ -1093,7 +1093,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "X library",
+	Name = "redz Library V5",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1177,7 +1177,7 @@ local function MakeDrag(Instance)
 end
 
 local function VerifyTheme(Theme)
-	for name,_ in pairs(Xlibrary.Themes) do
+	for name,_ in pairs(redzlib.Themes) do
 		if name == Theme then
 			return true
 		end
@@ -1191,14 +1191,14 @@ local function SaveJson(FileName, save)
 	end
 end
 
-local Theme = Xlibrary.Themes[Xlibrary.Save.Theme]
+local Theme = redzlib.Themes[redzlib.Save.Theme]
 
 local function AddEle(Name, Func)
-	Xlibrary.Elements[Name] = Func
+	redzlib.Elements[Name] = Func
 end
 
 local function Make(Ele, Instance, props, ...)
-	local Element = Xlibrary.Elements[Ele](Instance, props, ...)
+	local Element = redzlib.Elements[Ele](Instance, props, ...)
 	return Element
 end
 
@@ -1344,8 +1344,8 @@ local function GetColor(Instance)
 	return ""
 end
 
-
-function Xlibrary:GetIcon(index)
+-- /////////// --
+function redzlib:GetIcon(index)
 	if type(index) ~= "string" or index:find("rbxassetid://") or #index == 0 then
 		return index
 	end
@@ -1368,11 +1368,11 @@ function Xlibrary:GetIcon(index)
 	return firstMatch or index
 end
 
-function Xlibrary:SetTheme(NewTheme)
+function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
-	Xlibrary.Save.Theme = NewTheme
-	SaveJson("X library.json", Xlibrary.Save)
+	redzlib.Save.Theme = NewTheme
+	SaveJson("redz library V5.json", redzlib.Save)
 	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
@@ -1395,14 +1395,14 @@ function Xlibrary:SetTheme(NewTheme)
 	end)
 end
 
-function Xlibrary:SetScale(NewScale)
+function redzlib:SetScale(NewScale)
 	NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
 	UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
 end
 
-function Xlibrary:MakeWindow(Configs)
-	local WTitle = Configs[1] or Configs.Name or Configs.Title or "X library"
-	local WMiniText = Configs[2] or Configs.SubTitle or "by real_X"
+function redzlib:MakeWindow(Configs)
+	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
+	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
 	
@@ -1756,9 +1756,9 @@ function Xlibrary:MakeWindow(Configs)
 	end
 	function Window:SelectTab(TabSelect)
 		if type(TabSelect) == "number" then
-			Xlibrary.Tabs[TabSelect].func:Enable()
+			redzlib.Tabs[TabSelect].func:Enable()
 		else
-			for _,Tab in pairs(Xlibrary.Tabs) do
+			for _,Tab in pairs(redzlib.Tabs) do
 				if Tab.Cont == TabSelect.Cont then
 					Tab.func:Enable()
 				end
@@ -2701,4 +2701,4 @@ function Xlibrary:MakeWindow(Configs)
 	return Window
 end
 
-return Xlibrary
+return redzlib
