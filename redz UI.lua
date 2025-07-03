@@ -951,7 +951,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "redz library V5.json")
+	pcall(Save, "X library.json")
 end
 
 local Funcs = {} do
@@ -1093,7 +1093,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "redz Library V5",
+	Name = "X Library",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
