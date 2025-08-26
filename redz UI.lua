@@ -1,3 +1,18 @@
+local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{};:,.<>/?"
+
+function randomString(length)
+    local s = ""
+    for i = 1, length do
+        local randIndex = math.random(1, #chars) 
+        s = s .. string.sub(chars, randIndex, randIndex) 
+    end
+    return s
+end
+
+
+math.randomseed(os.time()) 
+local s = randomString(5)
+
 local MarketplaceService = game:GetService("MarketplaceService")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -951,7 +966,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "X library.json")
+	pcall(Save, "X Library.json")
 end
 
 local Funcs = {} do
@@ -1093,11 +1108,11 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "X Library",
+	Name = s,
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
-		Name = "Scale"
+		Name = s
 	})
 })
 
