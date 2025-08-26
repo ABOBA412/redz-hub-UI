@@ -1,28 +1,30 @@
-local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{};:,.<>/?"
-
-function randomString(length)
+-- randomizer for random names ( in case there is a client anti-cheat )
+local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+function randomName(length)
     local s = ""
     for i = 1, length do
-        local randIndex = math.random(1, #chars) 
-        s = s .. string.sub(chars, randIndex, randIndex) 
+        local randIndex = math.random(1, #chars)
+        s = s .. string.sub(chars, randIndex, randIndex)
     end
     return s
 end
 
+math.randomseed(tick()) 
 
-math.randomseed(os.time()) 
-local s = randomString(5)
-
+--services
 local MarketplaceService = game:GetService("MarketplaceService")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
-local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
+-- others
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
+local CoreGui = (gethui and gethui()) or game:GetService("CoreGui");
+
+-- UI colors
 local redzlib = {
 	Themes = {
 		Darker = {
@@ -966,7 +968,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "X Library.json")
+	pcall(Save, "redz library V5.json")
 end
 
 local Funcs = {} do
@@ -1108,11 +1110,11 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = s,
+	Name = "HUI",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
-		Name = s
+		Name = randomName(5)
 	})
 })
 
@@ -1359,7 +1361,6 @@ local function GetColor(Instance)
 	return ""
 end
 
--- /////////// --
 function redzlib:GetIcon(index)
 	if type(index) ~= "string" or index:find("rbxassetid://") or #index == 0 then
 		return index
@@ -1442,7 +1443,7 @@ function redzlib:MakeWindow(Configs)
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
 		BackgroundTransparency = 0.03,
-		Name = "Hub"
+		Name = randomName(5)
 	}), "Main")
 	Make("Gradient", MainFrame, {
 		Rotation = 45
@@ -1451,17 +1452,17 @@ function redzlib:MakeWindow(Configs)
 	local MainCorner = Make("Corner", MainFrame)
 	
 	local Components = Create("Folder", MainFrame, {
-		Name = "Components"
+		Name = randomName(5)
 	})
 	
 	local DropdownHolder = Create("Folder", ScreenGui, {
-		Name = "Dropdown"
+		Name = randomName(5)
 	})
 	
 	local TopBar = Create("Frame", Components, {
 		Size = UDim2.new(1, 0, 0, 28),
 		BackgroundTransparency = 1,
-		Name = "Top Bar"
+		Name = randomName(5)
 	})
 	
 	local Title = InsertTheme(Create("TextLabel", TopBar, {
