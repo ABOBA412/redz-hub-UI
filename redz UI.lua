@@ -1110,7 +1110,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = randomName(5),
+	Name = "HUI",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
